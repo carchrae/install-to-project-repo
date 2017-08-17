@@ -8,8 +8,13 @@
 # (c) 2012, Nikita Volkov. All rights reserved.
 # simplified version adapted by Tom Carchrae
 # https://github.com/carchrae/install-to-project-repo
-
-
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from builtins import (
+         bytes, dict, int, list, object, range, str,
+         ascii, chr, hex, input, next, oct, open,
+         pow, round, super,
+         filter, map, zip)
 
 import os
 import re
@@ -85,9 +90,9 @@ parsings = (
 
 unparsable_files = [r[0] for r in parsings if r[1] == None]
 if unparsable_files:
-  print "The following files could not be parsed:"
+  print("The following files could not be parsed:")
   for f in unparsable_files:
-    print "| - " + f
+    print("| - {}".format(f))
 
 
 parsings = [p for p in parsings if p[1] != None]
@@ -97,7 +102,7 @@ for (path, parsing) in parsings:
   if options.delete:
     os.remove(path)
 
-print maven_dependencies(parsings)
-print "These dependenceis have also been saved in the file : repo/dependencies.txt"
+print(maven_dependencies(parsings))
+print("These dependenceis have also been saved in the file : repo/dependencies.txt")
 f = open('repo/dependencies.txt', 'w')
 f.write(maven_dependencies(parsings))
